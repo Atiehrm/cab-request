@@ -20,4 +20,20 @@ public class PassengerServiceImp extends DataBaseAccess implements PassengerServ
         this.storageDao = storageDao;
     }
 
+    @Override
+    public void register(Passenger passenger) throws SQLException, ClassNotFoundException {
+        this.storageDao.savePassenger(passenger);
+
+    }
+
+    @Override
+    public void addToPassengerList(Passenger passenger) {
+        passengerList.add(passenger);
+
+    }
+
+    @Override
+    public List<Passenger> showPassengerList() {
+        return getPassengerList();
+    }
 }
