@@ -20,5 +20,21 @@ public class DriverServiceImp extends DataBaseAccess implements DriverService {
         this.storageDao = storageDao;
     }
 
+    @Override
+    public void register(Driver driver) throws SQLException, ClassNotFoundException {
+        this.storageDao.saveDriver(driver);
+    }
+
+    @Override
+    public void addToDriverList(Driver driver) {
+        driverList.add(driver);
+
+    }
+
+    @Override
+    public List<Driver> showDriverList() {
+        return getDriverList();
+    }
+
 
 }
