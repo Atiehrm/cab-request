@@ -1,14 +1,11 @@
-package Passenger.PassangerService;
+package DataBaseAccess;
 
-import Passenger.models.Passenger;
-import Storage.DataBaseAccess;
-import Storage.StorageDao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PassengerServiceImp extends DataBaseAccess implements PassengerService {
+public class PassengerServiceImp extends DataBaseAccess implements Passenger.PassangerService.PassengerService {
     private StorageDao storageDao;
     List<Passenger> passengerList = new ArrayList<>();
 

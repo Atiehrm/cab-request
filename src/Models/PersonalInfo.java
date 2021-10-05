@@ -1,4 +1,4 @@
-package Passenger.models;
+package Models;
 
 import java.sql.Date;
 

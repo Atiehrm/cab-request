@@ -1,6 +1,5 @@
-package Driver.models;
+package Models;
 
-import Passenger.models.PersonalInfo;
 
 import java.sql.Date;
 

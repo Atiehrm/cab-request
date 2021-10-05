@@ -1,4 +1,4 @@
-package Vehicle.VehicleService;
+package DataBaseAccess;
 
 import Vehicle.models.Vehicle;
 

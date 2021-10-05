@@ -1,4 +1,4 @@
-package Travel.models;
+package Models;
 
 public class Travel {
 }
