@@ -13,5 +13,9 @@ public class VehicleServiceImp extends DataBaseAccess implements VehicleService 
         this.storageDao = storageDao;
     }
 
+    @Override
+    public void add(Vehicle vehicle) throws SQLException, ClassNotFoundException {
+        this.storageDao.saveVehicle(vehicle);
 
+    }
 }
