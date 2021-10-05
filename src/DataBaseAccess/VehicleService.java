@@ -1,10 +1,10 @@
 package DataBaseAccess;
 
-import Vehicle.models.Vehicle;
+import Models.Vehicle;
 
 import java.sql.SQLException;
 
 public interface VehicleService {
-    void add(Vehicle vehicle) throws SQLException, ClassNotFoundException, Exception;
+    void save(Vehicle vehicle) throws SQLException, ClassNotFoundException, Exception;
 
 }
