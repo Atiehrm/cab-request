@@ -11,15 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PassengerServiceImp extends DataBaseAccess implements PassengerService {
-    List<Passenger> passengerList = new ArrayList<>();
-
-    public List<Passenger> getPassengerList() {
-        return passengerList;
-    }
 
     public PassengerServiceImp() throws SQLException, ClassNotFoundException {
     }
-
 
     @Override
     public void save(Passenger passenger) throws SQLException {
@@ -41,14 +35,45 @@ public class PassengerServiceImp extends DataBaseAccess implements PassengerServ
         }
     }
 
-    @Override
-    public void addToPassengerList(Passenger passenger) {
-        passengerList.add(passenger);
 
+    @Override
+    public List<Passenger> getPassengerList() throws SQLException {
+        List<Passenger> passengerList = new ArrayList<>();
+        if (getConnection() != null) {
+            Statement statement = getConnection().createStatement();
+            String sqlQuery = String.format("select * from passenger ");
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            while (resultSet.next()) {
+                Passenger passenger = new Passenger();
+                passenger.setId(resultSet.getInt("id"));
+                passenger.setFirstName(resultSet.getString("first_name"));
+                passenger.setLastName(resultSet.getString("last_name"));
+                passenger.setNationalCode(resultSet.getInt("national_code"));
+                passenger.setPhoneNumber(resultSet.getInt("phone_num"));
+                passenger.setBirthday(resultSet.getDate("birthday"));
+                passengerList.add(passenger);
+            }
+        }
+        return passengerList;
     }
 
     @Override
-    public List<Passenger> showPassengerList() {
-        return getPassengerList();
+    public Passenger findByNationalCode(int nationalCode) throws SQLException {
+        Passenger passenger = new Passenger();
+        if (getConnection() != null) {
+            Statement statement = getConnection().createStatement();
+            String sqlQuery = String.format("select * from passenger where national_code='%d'", nationalCode);
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            while (resultSet.next()) {
+                passenger.setId(resultSet.getInt("id"));
+                passenger.setFirstName(resultSet.getString("first_name"));
+                passenger.setLastName(resultSet.getString("last_name"));
+                passenger.setNationalCode(resultSet.getInt("national_code"));
+                passenger.setPhoneNumber(resultSet.getInt("phone_num"));
+                passenger.setBirthday(resultSet.getDate("birthday"));
+            }
+
+        }
+        return passenger;
     }
 }

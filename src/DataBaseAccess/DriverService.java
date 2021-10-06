@@ -1,6 +1,7 @@
 package DataBaseAccess;
 
 import Models.Driver;
+import Models.Passenger;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -8,7 +9,8 @@ import java.util.List;
 public interface DriverService {
     void save(Driver driver) throws SQLException;
 
-    void addToDriverList(Driver driver);
+    Driver findByNationalCode(int nationalCode) throws SQLException;
 
-    List<Driver> showDriverList() throws NullPointerException;
+
+    List<Driver> getDriverList() throws SQLException;
 }

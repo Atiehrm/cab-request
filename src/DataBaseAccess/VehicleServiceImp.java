@@ -11,7 +11,7 @@ public class VehicleServiceImp extends DataBaseAccess implements VehicleService 
 
     public VehicleServiceImp() throws SQLException, ClassNotFoundException {
     }
-    
+
     @Override
     public void save(Vehicle vehicle) throws SQLException {
         if (getConnection() != null) {

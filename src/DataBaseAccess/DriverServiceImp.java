@@ -1,6 +1,7 @@
 package DataBaseAccess;
 
 import Models.Driver;
+import Models.Passenger;
 import Models.PersonalInfo;
 
 import java.sql.PreparedStatement;
@@ -12,13 +13,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 
 public class DriverServiceImp extends DataBaseAccess implements DriverService {
-    List<Driver> driverList = new ArrayList<>();
-
-    public List<Driver> getDriverList() {
-        return driverList;
-    }
 
     public DriverServiceImp() throws SQLException, ClassNotFoundException {
+
     }
 
 
@@ -42,14 +39,46 @@ public class DriverServiceImp extends DataBaseAccess implements DriverService {
         }
     }
 
-    @Override
-    public void addToDriverList(Driver driver) {
-        driverList.add(driver);
 
-    }
 
     @Override
-    public List<Driver> showDriverList() {
-        return getDriverList();
+    public List<Driver> getDriverList() throws SQLException {
+        List<Driver> driverList = new ArrayList<>();
+        if (getConnection() != null) {
+            Statement statement = getConnection().createStatement();
+            String sqlQuery = String.format("select * from driver ");
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            while (resultSet.next()) {
+                Driver driver = new Driver();
+                driver.setId(resultSet.getInt("id"));
+                driver.setFirstName(resultSet.getString("first_name"));
+                driver.setLastName(resultSet.getString("last_name"));
+                driver.setNationalCode(resultSet.getInt("national_code"));
+                driver.setPhoneNumber(resultSet.getInt("phone_num"));
+                driver.setBirthday(resultSet.getDate("birthday"));
+                driverList.add(driver);
+            }
+        }
+        return driverList;
     }
+    @Override
+    public Driver findByNationalCode(int nationalCode) throws SQLException {
+        Driver driver = new Driver();
+        if (getConnection() != null) {
+            Statement statement = getConnection().createStatement();
+            String sqlQuery = String.format("select * from driver where national_code='%d'", nationalCode);
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            while (resultSet.next()) {
+                driver.setId(resultSet.getInt("id"));
+                driver.setFirstName(resultSet.getString("first_name"));
+                driver.setLastName(resultSet.getString("last_name"));
+                driver.setNationalCode(resultSet.getInt("national_code"));
+                driver.setPhoneNumber(resultSet.getInt("phone_num"));
+                driver.setBirthday(resultSet.getDate("birthday"));
+            }
+
+        }
+        return driver;
+    }
+
 }
